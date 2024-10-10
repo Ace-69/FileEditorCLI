@@ -145,6 +145,7 @@ int ReadKey() {
     }
     if (c == '\x1b') {
         char seq[3];
+        if (read(STDIN_FILENO, &seq[0], 1) != 1) return '\x1b';
         if (read(STDIN_FILENO, &seq[1], 1) != 1) return '\x1b';
         if (seq[0] == '[') {
             if (seq[1] >= '0' && seq[1] <= '9') {
