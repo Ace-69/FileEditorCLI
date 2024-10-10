@@ -554,7 +554,11 @@ void FileOpen(char *filename) {
     E.filename = strdup(filename);
 
     FILE *fp = fopen(filename, "r");
-    if (!fp) die("fopen");
+    if (!fp) {
+        Save();
+        return;
+    }
+    // die("fopen"); //old code
 
     char *line = NULL;
     size_t linecap = 0;
